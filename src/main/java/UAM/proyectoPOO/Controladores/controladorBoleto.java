@@ -1,7 +1,9 @@
 package UAM.proyectoPOO.Controladores;
 
-import UAM.proyectoPOO.Modelos.Boleto;
+import UAM.proyectoPOO.Modelos.*;
 import UAM.proyectoPOO.Repositorios.RepositorioBoleto;
+import UAM.proyectoPOO.Repositorios.RepositorioFuncion;
+import UAM.proyectoPOO.Repositorios.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,10 @@ import java.util.List;
 public class controladorBoleto {
     @Autowired
     private RepositorioBoleto miRepositorioBoleto;
+    @Autowired
+    private RepositorioFuncion miRepositorioFuncion;
+    @Autowired
+    private RepositorioUsuario miRepositorioUsuario;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -40,6 +46,15 @@ public class controladorBoleto {
         Boleto boletoActual=this.miRepositorioBoleto.findById(id).orElseThrow(RuntimeException::new);
         boletoActual.setTipo(infoBoleto.getTipo());
         boletoActual.setValor(infoBoleto.getValor());
+        return this.miRepositorioBoleto.save(boletoActual);
+    }
+    @PutMapping("{id_boleto}/funicon/{id_funcion}/usuario/{id_usuario}")
+    public Boleto update2(@PathVariable String id_boleto, @PathVariable String id_funcion,@PathVariable String id_usuario){
+        Boleto boletoActual = this.miRepositorioBoleto.findById(id_boleto).orElseThrow(RuntimeException::new);
+        Funcion funcionctual = this.miRepositorioFuncion.findById(id_funcion).orElseThrow(RuntimeException::new);
+        Usuario usuarioActual = this.miRepositorioUsuario.findById(id_usuario).orElseThrow(RuntimeException::new);
+        boletoActual.setFuncion(funcionctual);
+        boletoActual.setUsuario(usuarioActual);
         return this.miRepositorioBoleto.save(boletoActual);
     }
 }

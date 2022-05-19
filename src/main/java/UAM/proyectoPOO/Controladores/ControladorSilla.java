@@ -1,6 +1,8 @@
 package UAM.proyectoPOO.Controladores;
 
+import UAM.proyectoPOO.Modelos.Sala;
 import UAM.proyectoPOO.Modelos.Silla;
+import UAM.proyectoPOO.Repositorios.RepositorioSala;
 import UAM.proyectoPOO.Repositorios.RepositorioSilla;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,8 @@ import java.util.List;
 public class ControladorSilla {
     @Autowired
     private RepositorioSilla miRepositorioSilla;
+    @Autowired
+    private RepositorioSala miRepositorioSala;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -41,5 +45,12 @@ public class ControladorSilla {
         sillaActual.setLetra(infoSilla.getLetra());
         sillaActual.setNumero(infoSilla.getNumero());
         return miRepositorioSilla.save(sillaActual);
+    }
+    @PutMapping("{id_silla}/sala/{id_sala}")
+    public Silla update2(@PathVariable String id_silla,@PathVariable String id_sala){
+        Silla sillaActual = this.miRepositorioSilla.findById(id_silla).orElseThrow(RuntimeException::new);
+        Sala salaActual = this.miRepositorioSala.findById(id_sala).orElseThrow(RuntimeException::new);
+        sillaActual.setSala(salaActual);
+        return this.miRepositorioSilla.save(sillaActual);
     }
 }

@@ -2,6 +2,7 @@ package UAM.proyectoPOO.Modelos;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -11,6 +12,12 @@ public class Boleto {
     String _id;
     double valor;
     String tipo;
+
+    @DBRef
+    private Usuario usuario;
+
+    @DBRef
+    private Funcion funcion;
 
     public Boleto(double valor, String tipo) {
         this.valor = valor;
@@ -35,5 +42,21 @@ public class Boleto {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Funcion getFuncion() {
+        return funcion;
+    }
+
+    public void setFuncion(Funcion funcion) {
+        this.funcion = funcion;
     }
 }

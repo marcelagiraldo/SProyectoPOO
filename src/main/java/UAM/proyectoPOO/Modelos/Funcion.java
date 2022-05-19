@@ -61,20 +61,4 @@ public class Funcion {
     public void setAio(int aio) {
         this.aio = aio;
     }
-
-    public Pelicula getPelicula() {
-        return pelicula;
-    }
-
-    public Sala getSala() {
-        return sala;
-    }
-
-    public void setPelicula(Pelicula pelicula) {
-        this.pelicula = pelicula;
-    }
-
-    public void setSala(Sala sala) {
-        this.sala = sala;
-    }
 }
