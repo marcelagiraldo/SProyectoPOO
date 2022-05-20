@@ -24,7 +24,7 @@ public class ControladorFuncion {
     private RepositorioSala miRepositorioSala;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("pelicula/{id_pelicula}/sala({id_sala}")
+    @PostMapping("pelicula/{id_pelicula}/sala/{id_sala}")
     public Funcion create(@RequestBody Funcion infoFuncion,@PathVariable String id_pelicula,@PathVariable String id_sala){
         Pelicula peliculaActual = this.miRepositorioPelicula.findById(id_pelicula).orElseThrow(RuntimeException::new);
         Sala salaActual = this.miRepositorioSala.findById(id_sala).orElseThrow(RuntimeException::new);

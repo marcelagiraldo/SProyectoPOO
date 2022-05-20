@@ -18,6 +18,8 @@ public class Boleto {
 
     @DBRef
     private Funcion funcion;
+    @DBRef
+    private  Silla silla;
 
     public Boleto(double valor, String tipo) {
         this.valor = valor;
@@ -58,5 +60,13 @@ public class Boleto {
 
     public void setFuncion(Funcion funcion) {
         this.funcion = funcion;
+    }
+
+    public Silla getSilla() {
+        return silla;
+    }
+
+    public void setSilla(Silla silla) {
+        this.silla = silla;
     }
 }
