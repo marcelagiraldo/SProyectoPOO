@@ -48,7 +48,7 @@ public class ControladorFuncion {
         Funcion funcionActual =this.miRepositorioFuncion.findById(id).orElseThrow(RuntimeException::new);
         this.miRepositorioFuncion.delete(funcionActual);
     }
-    @PutMapping("{id}/pelicula/{id_pelicula}/sala({id_sala}")
+    @PutMapping("{id}/pelicula/{id_pelicula}/sala/{id_sala}")
     public Funcion update(@PathVariable String id, @RequestBody  Funcion infoFuncion,@PathVariable String id_pelicula,@PathVariable String id_sala) {
         Funcion funcionActual = this.miRepositorioFuncion.findById(id).orElseThrow(RuntimeException::new);
         Pelicula laPelicula = this.miRepositorioPelicula.findById(id_pelicula).get();

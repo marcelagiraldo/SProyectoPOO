@@ -25,9 +25,14 @@ public class controladorBoleto {
     private RepositorioSilla miRepositorioSilla;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
-    public Boleto create(@RequestBody Boleto infoBoleto){
-
+    @PostMapping("usuario/{id_usuario}/funcion/{id_funcion}/silla/{id_silla}")
+    public Boleto create(@RequestBody Boleto infoBoleto,@PathVariable String id_usuario,@PathVariable String id_funcion,@PathVariable String id_silla){
+        Usuario usuario = this.miRepositorioUsuario.findById(id_usuario).orElseThrow(RuntimeException::new);
+        Funcion funcion = this.miRepositorioFuncion.findById(id_funcion).orElseThrow(RuntimeException::new);
+        Silla silla = this.miRepositorioSilla.findById(id_silla).orElseThrow(RuntimeException::new);
+        infoBoleto.setFuncion(funcion);
+        infoBoleto.setUsuario(usuario);
+        infoBoleto.setSilla(silla);
         return this.miRepositorioBoleto.save(infoBoleto);
     }
     @GetMapping("")
@@ -37,6 +42,11 @@ public class controladorBoleto {
     @GetMapping("{id}")
     public Boleto show(@PathVariable String id){
         Boleto boletoActual =this.miRepositorioBoleto.findById(id).orElseThrow(RuntimeException::new);
+        return boletoActual;
+    }
+    @GetMapping("/_id/{_id}")
+    public Boleto buscarPorId(@PathVariable String _id){
+        Boleto boletoActual=this.miRepositorioBoleto.getBoletoPorId(_id);
         return boletoActual;
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)
