@@ -36,6 +36,10 @@ public class ControladorSilla {
         Silla sillaActual =this.miRepositorioSilla.findById(id).orElseThrow(RuntimeException::new);
         return sillaActual;
     }
+    @GetMapping("/sala/{id_sala}")
+    public List<Silla>getSillaSala(@PathVariable String id_sala){
+        return this.miRepositorioSilla.getSillasEnFuncion(id_sala);
+    }
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("{id}")
     public void delete(@PathVariable String id){

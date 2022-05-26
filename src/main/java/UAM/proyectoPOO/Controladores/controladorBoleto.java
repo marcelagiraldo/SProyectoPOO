@@ -63,7 +63,8 @@ public class controladorBoleto {
         return this.miRepositorioBoleto.save(boletoActual);
     }
     @PutMapping("{id_boleto}/funcion/{id_funcion}/usuario/{id_usuario}/silla/{id_silla}")
-    public Boleto update2(@PathVariable String id_boleto, @PathVariable String id_funcion,@PathVariable String id_usuario,@PathVariable String id_silla){
+    public Boleto update2(@RequestBody Boleto infoBoleto,@PathVariable String id_boleto, @PathVariable String id_funcion,@PathVariable String id_usuario,@PathVariable String id_silla){
+        update(id_boleto,infoBoleto);
         Boleto boletoActual = this.miRepositorioBoleto.findById(id_boleto).orElseThrow(RuntimeException::new);
         Funcion funcionctual = this.miRepositorioFuncion.findById(id_funcion).orElseThrow(RuntimeException::new);
         Usuario usuarioActual = this.miRepositorioUsuario.findById(id_usuario).orElseThrow(RuntimeException::new);
