@@ -1,5 +1,6 @@
 package UAM.proyectoPOO.Controladores;
 
+import UAM.proyectoPOO.Modelos.Funcion;
 import UAM.proyectoPOO.Modelos.Sala;
 import UAM.proyectoPOO.Modelos.Silla;
 import UAM.proyectoPOO.Repositorios.RepositorioSala;
@@ -20,8 +21,10 @@ public class ControladorSilla {
     private RepositorioSala miRepositorioSala;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
-    public Silla create(@RequestBody Silla infoSilla){
+    @PostMapping("sala/{id_Sala}")
+    public Silla create(@RequestBody Silla infoSilla,@PathVariable String id_Sala){
+        Sala salaActual = this.miRepositorioSala.findById(id_Sala).orElseThrow(RuntimeException::new);
+        infoSilla.setSala(salaActual);
         return this.miRepositorioSilla.save(infoSilla);
     }
     @GetMapping("")

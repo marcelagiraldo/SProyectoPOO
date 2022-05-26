@@ -1,5 +1,6 @@
 package UAM.proyectoPOO.Controladores;
 
+import UAM.proyectoPOO.Modelos.Funcion;
 import UAM.proyectoPOO.Modelos.Sala;
 import UAM.proyectoPOO.Repositorios.RepositorioSala;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class ControladorSala {
         Sala salaActual = this.miRepositorioSala.findById(id).orElseThrow(RuntimeException::new);
         return salaActual;
     }
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("{id}")
     public void delete(@PathVariable String id){
